@@ -1,6 +1,5 @@
 package com.example.searchsuggestions.presentation.search_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.searchsuggestions.data.repository.SearchSuggestionsRepository
@@ -24,14 +23,16 @@ class SearchViewModel @Inject constructor(
         when (event) {
             is SearchScreenEvents.OnQueryUpdated -> {
                 _uiState.update {
-                    getSuggestions(event.query)
-                    it.copy(query = event.query)
+                    event.query.run {
+                        getSearchSuggestions(this)
+                        it.copy(query = this)
+                    }
                 }
             }
         }
     }
 
-    private fun getSuggestions(query: String) {
+    private fun getSearchSuggestions(query: String) {
         viewModelScope.launch {
             val suggestions = repo.getSearchSuggestions(query)
             _uiState.update {

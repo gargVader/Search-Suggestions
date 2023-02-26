@@ -11,6 +11,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +23,8 @@
             app:endIconDrawable="@drawable/baseline_close_24"
             app:endIconMode="custom"
             app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@drawable/baseline_arrow_back_24">
+            app:startIconDrawable="@drawable/baseline_arrow_back_24"
+            app:startIconTint="#1F49D2">
 
 
             <EditText
@@ -35,5 +37,23 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/searchLayout" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:listitem="@layout/search_suggestion_item" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
