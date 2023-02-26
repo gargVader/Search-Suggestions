@@ -33,10 +33,13 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getSearchSuggestions(query: String) {
+        _uiState.update {
+            it.copy(isLoading = true)
+        }
         viewModelScope.launch {
             val suggestions = repo.getSearchSuggestions(query)
             _uiState.update {
-                it.copy(searchSuggestionsList = suggestions)
+                it.copy(searchSuggestionsList = suggestions, isLoading = false)
             }
         }
     }

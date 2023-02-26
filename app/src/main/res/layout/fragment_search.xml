@@ -32,6 +32,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/text_view_border"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="17dp"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -48,12 +50,23 @@
             app:layout_constraintTop_toBottomOf="@id/searchLayout" />
 
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-8dp"
+            android:layout_marginBottom="-8dp"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintTop_toBottomOf="@id/progressBar"
             tools:listitem="@layout/search_suggestion_item" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
