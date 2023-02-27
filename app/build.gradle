@@ -81,4 +81,14 @@ dependencies {
 
     // Feature module Support
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:3.10.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0'
+    testImplementation 'org.mockito:mockito-inline:3.10.0'
+
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+
 }
