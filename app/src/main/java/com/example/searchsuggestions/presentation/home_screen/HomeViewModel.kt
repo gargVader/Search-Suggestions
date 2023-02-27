@@ -1,25 +1,36 @@
 package com.example.searchsuggestions.presentation.home_screen
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.searchsuggestions.data.repository.SearchSuggestionsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repo: SearchSuggestionsRepository
+
 ) : ViewModel() {
 
-    init {
+    private val _uiState = MutableStateFlow(HomeState())
+    val uiState: StateFlow<HomeState> = _uiState.asStateFlow()
 
-    }
-
-    fun getSuggestions() {
-        viewModelScope.launch {
-            val res = repo.getSearchSuggestions("India")
+    fun onEvent(event: HomeScreenEvents) {
+        when (event) {
+            is HomeScreenEvents.OnQueryUpdated -> {
+                _uiState.update {
+                    it.copy(query = event.query)
+                }
+            }
         }
     }
+
+    fun performSearch() {
+        if (uiState.value.query.isNotBlank()) {
+            // make api call
+        }
+    }
+
 
 }

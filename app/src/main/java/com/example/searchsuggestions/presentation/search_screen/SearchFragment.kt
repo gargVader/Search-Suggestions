@@ -1,12 +1,10 @@
 package com.example.searchsuggestions.presentation.search_screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -43,19 +41,19 @@ class SearchFragment : Fragment() {
 
     private fun setupEditText() {
         binding.editText.requestFocus()
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+//        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         binding.editText.addTextChangedListener(afterTextChanged = {
             if (it.toString().isNotEmpty()) binding.searchLayout.isEndIconVisible = true
             viewModel.onEvent(SearchScreenEvents.OnQueryUpdated(it.toString()))
         })
-        binding.editText.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-
+        binding.editText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                returnQueryToHomeFragment()
                 return@setOnEditorActionListener true
             }
-            return@setOnEditorActionListener false
+            false
         }
     }
 
@@ -63,6 +61,8 @@ class SearchFragment : Fragment() {
         val adapter = SearchSuggestionsAdapter(
             onSearchClick = {
                 // Navigate back to Home with query
+                updateEditText(it)
+                returnQueryToHomeFragment()
             },
             onFillClick = {
                 updateEditText(it)
@@ -86,7 +86,6 @@ class SearchFragment : Fragment() {
                 } else {
                     binding.progressBar.visibility = View.INVISIBLE
                 }
-
             }
         }
     }
@@ -95,7 +94,6 @@ class SearchFragment : Fragment() {
         binding.searchLayout.isEndIconVisible = false
         // Back icon
         binding.searchLayout.setStartIconOnClickListener {
-            // Navigate back to Home with query
             findNavController().popBackStack()
         }
         // Close icon
@@ -112,5 +110,13 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun returnQueryToHomeFragment() {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+            "query",
+            viewModel.uiState.value.query
+        )
+        findNavController().popBackStack()
     }
 }

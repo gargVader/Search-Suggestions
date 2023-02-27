@@ -11,7 +11,7 @@ import com.example.searchsuggestions.R
 
 class SearchSuggestionsAdapter(
     private val onFillClick: (suggestion: String) -> Unit,
-    private val onSearchClick: () -> Unit
+    private val onSearchClick: (suggestion: String) -> Unit
 ) :
     RecyclerView.Adapter<SearchSuggestionsAdapter.ViewHolder>() {
 
@@ -24,7 +24,7 @@ class SearchSuggestionsAdapter(
     class ViewHolder(
         view: View,
         val onFillClick: (suggestion: String) -> Unit,
-        val onSearchClick: () -> Unit
+        val onSearchClick: (suggestion: String) -> Unit
     ) : RecyclerView.ViewHolder(view) {
         private val textView: TextView = view.findViewById(R.id.suggestion_text_view)
         private val suggestionLayout: LinearLayout = view.findViewById(R.id.suggestion_layout)
@@ -37,7 +37,7 @@ class SearchSuggestionsAdapter(
         fun bind(suggestion: String) {
             textView.text = suggestion
             suggestionLayout.setOnClickListener {
-                onSearchClick()
+                onSearchClick(suggestion)
             }
             fillButton.setOnClickListener {
                 onFillClick(suggestion)
