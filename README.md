@@ -33,11 +33,13 @@ Android app that shows search suggestions from DuckDuckGo API
 - Substring matching the query is highlighted in list of suggestions.
 - ❌ Cross icon not visible until some text is entered.
 - Basic unit tests added for HomeViewModel & SearchViewModel.
+- Github Workflow added to build & run tests for every push.
 - [minor] If user returns from SearchFragment without making a search, then previous search results are still shown.
 - [minor] Internationalization - String resources added for a Hindi.
 
 # ⭐ Possible Improvements
--
+- Could have added more tests
+- Could have added Google Speech to Text. Found it very common on many apps.
 
 # File structure
 
