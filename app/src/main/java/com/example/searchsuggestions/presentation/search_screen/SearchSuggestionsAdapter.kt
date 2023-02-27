@@ -1,5 +1,8 @@
 package com.example.searchsuggestions.presentation.search_screen
 
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,28 +23,19 @@ class SearchSuggestionsAdapter(
             field = value
             notifyDataSetChanged()
         }
+    var query: String = ""
 
     class ViewHolder(
         view: View,
         val onFillClick: (suggestion: String) -> Unit,
         val onSearchClick: (suggestion: String) -> Unit
     ) : RecyclerView.ViewHolder(view) {
-        private val textView: TextView = view.findViewById(R.id.suggestion_text_view)
-        private val suggestionLayout: LinearLayout = view.findViewById(R.id.suggestion_layout)
-        private val fillButton: ImageView = view.findViewById(R.id.fill_button)
+        val textView: TextView = view.findViewById(R.id.suggestion_text_view)
+        val suggestionLayout: LinearLayout = view.findViewById(R.id.suggestion_layout)
+        val fillButton: ImageView = view.findViewById(R.id.fill_button)
 
         init {
 
-        }
-
-        fun bind(suggestion: String) {
-            textView.text = suggestion
-            suggestionLayout.setOnClickListener {
-                onSearchClick(suggestion)
-            }
-            fillButton.setOnClickListener {
-                onFillClick(suggestion)
-            }
         }
 
     }
@@ -58,11 +52,23 @@ class SearchSuggestionsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
-        /*
-        SpannableString str = new SpannableString("Highlighted. Not highlighted.")
-        str.setSpan(new BackgroundColorSpan (Color.YELLOW), 0, 11, 0)
+        val suggestion = data[position]
+        holder.suggestionLayout.setOnClickListener {
+            onSearchClick(suggestion)
+        }
+        holder.fillButton.setOnClickListener {
+            onFillClick(suggestion)
+        }
+        // Build spannable string
+        val index = (suggestion.lowercase()).indexOf(query.lowercase())
+        val spannableString = SpannableString(suggestion)
+        if (index != -1) {
+            spannableString.setSpan(StyleSpan(Typeface.BOLD), index, index + query.length, 0)
+        }
+        holder.textView.text = spannableString
+    }
 
-         */
+    fun updateQuery(query: String) {
+        this.query = query
     }
 }

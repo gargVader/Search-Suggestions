@@ -23,6 +23,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by viewModels()
+    lateinit var adapter: SearchSuggestionsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,8 +33,8 @@ class SearchFragment : Fragment() {
         val view = binding.root
 
         binding.progressBar.isIndeterminate = true
-        setupEditText()
         setupRecyclerView()
+        setupEditText()
         setupInputLayout()
 
         return view
@@ -46,6 +47,7 @@ class SearchFragment : Fragment() {
 
         binding.editText.addTextChangedListener(afterTextChanged = {
             if (it.toString().isNotEmpty()) binding.searchLayout.isEndIconVisible = true
+            adapter.updateQuery(it.toString())
             viewModel.onEvent(SearchScreenEvents.OnQueryUpdated(it.toString()))
         })
         binding.editText.setOnEditorActionListener { _, actionId, _ ->
@@ -58,7 +60,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val adapter = SearchSuggestionsAdapter(
+        adapter = SearchSuggestionsAdapter(
             onSearchClick = {
                 // Navigate back to Home with query
                 updateEditText(it)
