@@ -42,11 +42,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupEditText() {
-        binding.editText.setOnFocusChangeListener { v, hasFocus ->
-            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(binding.editText, InputMethodManager.SHOW_IMPLICIT)
-        }
         binding.editText.requestFocus()
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         binding.editText.addTextChangedListener(afterTextChanged = {
             if (it.toString().isNotEmpty()) binding.searchLayout.isEndIconVisible = true
@@ -64,7 +62,7 @@ class SearchFragment : Fragment() {
     private fun setupRecyclerView() {
         val adapter = SearchSuggestionsAdapter(
             onSearchClick = {
-
+                // Navigate back to Home with query
             },
             onFillClick = {
                 updateEditText(it)
@@ -97,6 +95,7 @@ class SearchFragment : Fragment() {
         binding.searchLayout.isEndIconVisible = false
         // Back icon
         binding.searchLayout.setStartIconOnClickListener {
+            // Navigate back to Home with query
             findNavController().popBackStack()
         }
         // Close icon
@@ -114,5 +113,4 @@ class SearchFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
