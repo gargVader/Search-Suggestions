@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Search Suggestions</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">Search</string>
+    <string name="showing_results_for">Showing results for</string>
 </resources>

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.searchsuggestions.R
@@ -40,11 +39,12 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.uiState.collect {
                 if (it.query.isBlank()) {
-                    binding.searchTextView.text = "Search"
+                    binding.searchTextView.text = getString(R.string.search)
                     binding.searchResultsTextView.text = ""
                 } else {
                     binding.searchTextView.text = it.query
-                    binding.searchResultsTextView.text = "Showing results for \"${it.query}\""
+                    binding.searchResultsTextView.text =
+                        getString(R.string.showing_results_for) + "\"${it.query}\""
                 }
             }
         }
