@@ -5,9 +5,9 @@
 Android app that shows search suggestions from DuckDuckGo API
 
 # 📷 Previews
-<!-- Download [apk](https://github.com/gargVader/Reactive-News-App/releases/tag/v1) -->
+Download [apk](https://github.com/gargVader/Search-Suggestions/releases/download/1.0.0/search.suggestions.app.apk)
 
-<!-- [Demo video 📹](https://drive.google.com/file/d/1v7DwMtX6meV7R4MmEpq9Ybcdm-laAl8O/view?usp=sharing) -->
+[Demo video 📹](https://drive.google.com/file/d/1wN6xWOGRaKZNfruWx5i0QSOFo8OxvwPm/view?usp=share_link)
 <p align="center">
   <img width="250" src="Screenshots/1.png" />
   <img width="250" src="Screenshots/2.png" />
