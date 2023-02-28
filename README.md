@@ -14,7 +14,7 @@ Download [apk](https://github.com/gargVader/Search-Suggestions/releases/download
   <img width="250" src="Screenshots/3.png" />
 </p>
 
-# 🛠 Tech Sacks & Open Source Libraries
+# 🛠 Tech Stacks & Open Source Libraries
 
 - ViewModel
 - Flows
