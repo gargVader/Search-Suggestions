@@ -1,6 +1,7 @@
 package com.example.searchsuggestions.presentation.search_screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,7 @@ class SearchFragment : Fragment() {
         binding.editText.addTextChangedListener(afterTextChanged = {
             if (it.toString().isNotEmpty()) binding.searchLayout.isEndIconVisible = true
             adapter.updateQuery(it.toString())
+            Log.d("Girish", "TextChangedListener: ${it.toString()}")
             viewModel.onEvent(SearchScreenEvents.OnQueryUpdated(it.toString()))
         })
         binding.editText.setOnEditorActionListener { _, actionId, _ ->

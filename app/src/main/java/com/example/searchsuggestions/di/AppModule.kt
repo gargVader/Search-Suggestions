@@ -7,6 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -17,10 +18,10 @@ object AppModule {
     @Singleton
     fun provideDuckDuckGoApi(): DuckDuckGoApi {
         return Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
             .baseUrl(DuckDuckGoApi.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
-            .create(DuckDuckGoApi::class.java)
+            .create()
     }
 
 }
