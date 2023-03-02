@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.searchsuggestions.R
 import com.example.searchsuggestions.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -77,6 +78,7 @@ class SearchFragment : Fragment() {
         val dividerItemDecoration = DividerItemDecoration(
             context, layoutManager.orientation
         )
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_item, null));
         binding.recyclerView.addItemDecoration(dividerItemDecoration);
 
         lifecycleScope.launch {

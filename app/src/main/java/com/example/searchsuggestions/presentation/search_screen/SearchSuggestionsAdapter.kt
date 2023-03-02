@@ -63,7 +63,7 @@ class SearchSuggestionsAdapter(
         val index = (suggestion.lowercase()).indexOf(query.lowercase())
         val spannableString = SpannableString(suggestion)
         if (index != -1) {
-            spannableString.setSpan(StyleSpan(Typeface.BOLD), index, index + query.length, 0)
+            spannableString.setSpan(StyleSpan(Typeface.BOLD), index + query.length, suggestion.length, 0)
         }
         holder.textView.text = spannableString
     }
