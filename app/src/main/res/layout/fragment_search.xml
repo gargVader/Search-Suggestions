@@ -67,6 +67,14 @@
             app:layout_constraintTop_toBottomOf="@id/progressBar"
             tools:listitem="@layout/search_suggestion_item" />
 
+        <TextView
+            android:id="@+id/recycler_view_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/error_while_fetching_data"
+            app:layout_constraintTop_toBottomOf="@id/progressBar" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

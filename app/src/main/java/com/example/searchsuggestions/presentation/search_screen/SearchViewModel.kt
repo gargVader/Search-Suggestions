@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,9 +41,12 @@ class SearchViewModel @Inject constructor(
         latestApiRequestJob?.cancel()
         latestApiRequestJob = viewModelScope.launch {
             val suggestions = repo.getSearchSuggestions(query)
-            _uiState.update {
-                Log.d("Girish", "uiUpdate: $suggestions")
-                it.copy(searchSuggestionsList = suggestions, isLoading = false)
+            // Check if coroutine is still active
+            if (isActive) {
+                _uiState.update {
+                    Log.d("Girish", "uiUpdate: $suggestions")
+                    it.copy(searchSuggestionsList = suggestions, isLoading = false)
+                }
             }
         }
     }

@@ -2,4 +2,5 @@
     <string name="app_name">Search Suggestions</string>
     <string name="search">Search</string>
     <string name="showing_results_for">Showing results for</string>
+    <string name="error_while_fetching_data">Error while fetching data</string>
 </resources>

@@ -8,7 +8,7 @@ class SearchSuggestionsRepository @Inject constructor(
     private val api: DuckDuckGoApi
 ) {
 
-    suspend fun getSearchSuggestions(query: String): List<String> {
+    suspend fun getSearchSuggestions(query: String): List<String>? {
         if (query.isEmpty() or query.isBlank()) return emptyList()
         Log.d("Girish", "apiRequest: query:$query")
         val suggestions = try {
@@ -18,6 +18,6 @@ class SearchSuggestionsRepository @Inject constructor(
             null
         }
         Log.d("Girish", "apiResponse: query:$query $suggestions")
-        return suggestions ?: emptyList()
+        return suggestions
     }
 }

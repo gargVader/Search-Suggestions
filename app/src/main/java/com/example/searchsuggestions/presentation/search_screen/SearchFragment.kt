@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -85,7 +87,16 @@ class SearchFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.uiState.collect {
-                adapter.data = it.searchSuggestionsList
+
+                if (it.searchSuggestionsList != null) {
+                    adapter.data = it.searchSuggestionsList
+                    binding.recyclerView.visibility = VISIBLE
+                    binding.recyclerViewEmpty.visibility = GONE
+                }else{
+                    binding.recyclerView.visibility = GONE
+                    binding.recyclerViewEmpty.visibility = VISIBLE
+                }
+
 
                 if (it.isLoading) {
                     binding.progressBar.visibility = View.VISIBLE
