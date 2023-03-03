@@ -12,6 +12,8 @@ Download [apk](https://github.com/gargVader/Search-Suggestions/releases/download
   <img width="250" src="Screenshots/1.png" />
   <img width="250" src="Screenshots/2.png" />
   <img width="250" src="Screenshots/3.png" />
+  <img width="250" src="Screenshots/4.png" />
+  <img width="250" src="Screenshots/5.png" />
 </p>
 
 # 🛠 Tech Stacks & Open Source Libraries
