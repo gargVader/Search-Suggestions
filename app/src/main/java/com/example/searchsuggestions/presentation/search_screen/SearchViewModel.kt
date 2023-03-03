@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.searchsuggestions.data.repository.SearchSuggestionsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,6 +20,7 @@ class SearchViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(SearchState())
     val uiState: StateFlow<SearchState> = _uiState.asStateFlow()
+    var latestApiRequestJob: Job? = null
 
     fun onEvent(event: SearchScreenEvents) {
         when (event) {
@@ -35,7 +37,8 @@ class SearchViewModel @Inject constructor(
         _uiState.update {
             it.copy(isLoading = true)
         }
-        viewModelScope.launch {
+        latestApiRequestJob?.cancel()
+        latestApiRequestJob = viewModelScope.launch {
             val suggestions = repo.getSearchSuggestions(query)
             _uiState.update {
                 Log.d("Girish", "uiUpdate: $suggestions")
