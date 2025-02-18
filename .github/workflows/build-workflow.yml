@@ -52,26 +52,26 @@ jobs:
           echo "Version Name: $VERSION_NAME"
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: "v${{ env.VERSION_NAME }}"
-          release_name: "Release v${{ env.VERSION_NAME }}"
-          draft: false
-          prerelease: false
-
       - name: List files for debug
-        run: ls -lah app/build/outputs/apk/release
+        run: tree app/build/outputs/
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/release/app-release-unsigned.apk
-          asset_name: app-release-unsigned.apk
-          asset_content_type: application/vnd.android.package-archive
+      # - name: Create GitHub Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: "v${{ env.VERSION_NAME }}"
+      #     release_name: "Release v${{ env.VERSION_NAME }}"
+      #     draft: false
+      #     prerelease: false
+
+      # - name: Upload Release Asset
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: app/build/outputs/apk/release/app-release-unsigned.apk
+      #     asset_name: app-release-unsigned.apk
+      #     asset_content_type: application/vnd.android.package-archive
