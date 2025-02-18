@@ -26,13 +26,10 @@ jobs:
       - name: Build project
         run: ./gradlew assembleRelease
 
-      - name: List Output Files
-        run: ls -R app/build/outputs/apk
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-release.apk
+          name: app-release-unsigned.apk
           path: app/build/outputs/apk/release/app-release-unsigned.apk
 
   release:
@@ -50,7 +47,7 @@ jobs:
       - name: Extract Version Name
         id: extract_version
         run: |
-          VERSION_NAME=$(awk -F '"' '/versionName/ {print $2}' app/build.gradle)
+          VERSION_NAME=$(awk -F '"' '/versionName/ {print $2}' app/build.gradle.kts)
           echo "Version Name: $VERSION_NAME"
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
