@@ -3,9 +3,7 @@ name: Pre Merge Checks
 
 # Triggering this workflow
 on:
-  push:
-    branches:
-      - '*'
+  workflow_dispatch:
 
 # Jobs to be run in this workflow
 jobs:
