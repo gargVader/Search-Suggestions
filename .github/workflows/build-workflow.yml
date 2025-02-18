@@ -47,7 +47,7 @@ jobs:
       - name: Extract Version Name
         id: extract_version
         run: |
-          VERSION_NAME=$(awk -F '"' '/versionName/ {print $2}' app/build.gradle.kts)
+          VERSION_NAME=$(awk -F '"' '/versionName/ {print $2}' app/build.gradle)
           echo "Version Name: $VERSION_NAME"
           echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
 
