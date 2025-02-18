@@ -63,6 +63,9 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: List files for debug
+        run: ls -lah app/build/outputs/apk/release
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
